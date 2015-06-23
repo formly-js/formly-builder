@@ -1,0 +1,60 @@
+'use strict';
+
+var Settings = {
+   
+    siteAssetURL: "/Scripts/",
+    siteRelativeRoot: "..",
+    siteURL: "https://spengineeringltd-public.sharepoint.com/SiteAsset/User/Scripts/"
+};
+    
+var app = angular.module('formlyForm', ['formly', 'formlyBootstrap', 'angularFileUpload']);
+
+ 
+ app.filter('to_trusted', ['$sce', function($sce){
+        return function(text) {
+            return $sce.trustAsHtml(text);
+        };
+    }]);
+
+	
+app.filter('getByKey', function() {
+  return function(input, key) {
+    var i=0, len=input.length;
+    for (; i<len; i++) {
+      if (input[i].key == key) {
+		  var returnObj=input[i];
+		  var j=i+1;
+        return {obj:returnObj,index:j};
+      }
+    }
+    return null;
+  }
+});
+
+app.filter('getByProperty', function () {
+    return function (input, propertyName,propertyValue) {
+        var i = 0, len = input.length;
+        for (; i < len; i++) {
+            if (input[i].hasOwnProperty(propertyName) && input[i][propertyName] == propertyValue) {
+                var returnObj = input[i];
+               
+                return { obj: returnObj, index: i };
+            }
+        }
+        return null;
+    }
+});
+app.filter('getByHasProperty', function () {
+    return function (input, propertyName) {
+        var foundObjs = new Array();
+        var i = 0, len = input.length;
+        for (; i < len; i++) {
+            if (input[i].hasOwnProperty(propertyName)) {
+                foundObjs.push(input[i]);
+            }
+        }
+        return foundObjs;
+    }
+});
+
+

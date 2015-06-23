@@ -1,0 +1,67 @@
+﻿
+<div class="container-fluid">
+    <div class="row">
+
+        <hr />
+
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Builder</h3>
+                </div>
+                <div fb-builder="default"></div>
+
+                <div class="panel-footer">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="isShowScope" />
+                            Show scope
+                        </label>
+                    </div>
+                    <pre ng-if="isShowScope">{{forms| json}}</pre>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div fb-components class="components-panel">
+            
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+<div style="z-index:1;background-color:white;position:relative">
+    <a href="{{vm.SwitchView.link}}">{{vm.SwitchView.text}}</a>
+    <h1>{{vm.exampleTitle}}</h1>
+
+    <hr />
+    <div kcd-recompile="vm.fields">
+        <formly-form model="vm.model" fields="vm.fields" form="vm.form1">
+            <br />
+            <br />
+            <p>
+                <button type="button" class="btn btn-primary" ng-click="vm.SaveForm()">Save Form</button>
+                <button type="button" class="btn btn-primary" ng-click="vm.PublishForm()">Preview Form</button>
+            </p>
+        </formly-form>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" ng-model="isFormlyShowScope" />
+            Show scope
+        </label>
+    </div>
+    <div ng-if="isFormlyShowScope">
+        <hr />
+        <h2>Model</h2>
+        <pre>{{vm.model | json}}</pre>
+        <h2>Fields <small>(note, functions are not shown)</small></h2>
+        <pre>{{vm.fields | json}}</pre>
+    </div>
+</div>
