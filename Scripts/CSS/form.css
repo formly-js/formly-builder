@@ -12,6 +12,8 @@
 }
 .components-panel
 {
-    position:fixed; z-index:0;left:50%;right:20px; 
-  padding-left: 15px;
+     position:fixed; z-index:0;
+    right:20px; 
+	padding-left: 15px;
+	width: 42%;
 }
