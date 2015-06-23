@@ -1,6 +1,6 @@
-app.controller('FormCtrl', ['formlyVersion', 'getOIMConfig', '$scope', 'ListService', '$builder', '$validator', '$timeout', 'DesignFormService', '$location', 'constantData', function MainCtrl(formlyVersion, getOIMConfig, $scope, ListService, $builder, $validator, $timeout, DesignFormService, $location, constantData) {
+app.controller('FormCtrl', ['formlyVersion', 'getOIMConfig', '$scope', '$builder', '$validator', '$timeout','$location', 'constantData', function MainCtrl(formlyVersion, getOIMConfig, $scope,  $builder, $validator, $timeout, $location, constantData) {
     var listName = constantData.appFormDesignListName;
-    var listService = new ListService(listName);
+  
 
     var vm = this;
 
@@ -17,39 +17,13 @@ app.controller('FormCtrl', ['formlyVersion', 'getOIMConfig', '$scope', 'ListServ
     };
     saveForm = function (FormsValuePairs,successFunc)
     {
-        var itemID = listService.getItemId();
-
-        if (!itemID)
-            listService.pushFieldUpdate(FormsValuePairs, "Title", "Default");
-
-        var promise = listService.updateFormItem(itemID, FormsValuePairs);
-        promise.then(function (newID) {
-            listService.setItemId(newID);
-            if (successFunc)
-            successFunc();
-           
-        });
+       
     }
     vm.PublishForm = function () {
-        //save form 
-        //and publish
-        var FormsValuePairs = new Array();
-        listService.pushFieldUpdate(FormsValuePairs, "DesignCode", listService.CDataWrap(angular.toJson($builder.forms)));
-        listService.pushFieldUpdate(FormsValuePairs, "formlyCode", listService.CDataWrap(angular.toJson(getOIMConfig.getOIMConfig($scope.forms["default"], $builder.forms))));
-        listService.pushFieldUpdate(FormsValuePairs, "formlyModelCode", listService.CDataWrap(angular.toJson(vm.model)));
         
-
-        saveForm(FormsValuePairs, function () { $location.path("/FormPublish"); });
           
     }
     vm.SaveForm = function () {
-        //save design form first
-        var FormsValuePairs = new Array();
-        listService.pushFieldUpdate(FormsValuePairs, "DesignCode", listService.CDataWrap(angular.toJson($builder.forms)));
-        
-        saveForm(FormsValuePairs, function () { alert("save successful") });
-   
-
 
     }
     function getModel(form) {
@@ -98,24 +72,15 @@ app.controller('FormCtrl', ['formlyVersion', 'getOIMConfig', '$scope', 'ListServ
    
     getDesignForm=function()
     {
-        var fieldNames = new Array();
-        fieldNames.push("ID");
-        fieldNames.push("DesignCode");
-        var designFormService = new DesignFormService(listService);
-        var promise = designFormService.getDesignForm(fieldNames);
-        return promise;
+      
        
     }
     loadFormData = function (itemData) {
         var forms;
-        if (itemData.length > 0) {
-            forms = angular.fromJson(itemData[0].DesignCode);
-            listService.setItemId(itemData[0].ID);
-        }
-        else {
+       
             //no design found, load default form design
              forms = constantData.defaultFormDesign;
-        }
+        
         angular.forEach(forms, function (form, formName, obj) {
             //clear out existing form components
             clearForm(formName);
@@ -142,8 +107,7 @@ app.controller('FormCtrl', ['formlyVersion', 'getOIMConfig', '$scope', 'ListServ
         //clear all forms first for back navigation button
         //$builder.forms = {};
         $scope.forms = $builder.forms;
-        //getDesignForm().          
-        //   then(function (itemData) {
+      
         itemData = new Array();
                loadFormData(itemData);
                $scope.$watch('forms', function (newValue, oldValue) {
@@ -162,7 +126,7 @@ app.controller('FormCtrl', ['formlyVersion', 'getOIMConfig', '$scope', 'ListServ
                    }
 
                }, true);
-           //});
+      
         
         
     }
