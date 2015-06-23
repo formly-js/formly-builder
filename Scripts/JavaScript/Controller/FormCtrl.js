@@ -7,7 +7,10 @@ app.controller('FormCtrl', ['formlyVersion', 'getOIMConfig', '$scope', '$builder
 
     vm.exampleTitle = 'Formly Form Live!'; // add this
 
-   
+    vm.RawFieldCode = function () {
+        $scope.isFormlyShowScope = true;
+        $scope.rawFieldCode=getOIMConfig.getOIMConfig($scope.forms["default"], $builder.forms);
+    }
     
     vm.CopyForm = function () {
        

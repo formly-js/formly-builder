@@ -45,8 +45,8 @@
             <br />
             <br />
             <p>
-                <button type="button" class="btn btn-primary" ng-click="vm.SaveForm()">Save Form</button>
-                <button type="button" class="btn btn-primary" ng-click="vm.PublishForm()">Preview Form</button>
+                <button type="button" class="btn btn-primary" ng-click="vm.RawFieldCode()">View formly Design Raw Code</button>
+                
             </p>
         </formly-form>
     </div>
@@ -62,6 +62,6 @@
         <h2>Model</h2>
         <pre>{{vm.model | json}}</pre>
         <h2>Fields <small>(note, functions are not shown)</small></h2>
-        <pre>{{vm.fields | json}}</pre>
+        <pre>{{rawFieldCode|json}}</pre>
     </div>
 </div>

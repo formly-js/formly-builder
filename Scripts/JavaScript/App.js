@@ -19,7 +19,7 @@ app.config(['$routeProvider', function ($routeProvider) {
 
        //}).
        when('/FormDesign', {
-           templateUrl: Settings.PublicScriptURL + 'View/FormDesign.html',
+           templateUrl: Settings.siteURL + 'View/FormDesign.html',
            controller: 'FormCtrl',
            controllerAs: 'vm'
 
