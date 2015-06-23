@@ -1,13 +1,13 @@
 'use strict';
 
 var Settings = {
-   
+
     siteAssetURL: "/Scripts/",
     siteRelativeRoot: "..",
     siteURL: "../Scripts/",
-    PublicScriptURL: "https://spengineeringltd-public.sharepoint.com/SiteAsset/User/Scripts/"
+    PublicScriptURL: "https://spengineeringltd-public.sharepoint.com/SiteAsset/Scripts/"
 };
-    
+
 var app = angular.module('formlyExample', ['formly', 'formlyBootstrap', 'angularFileUpload', 'builder', 'builder.components', 'validator.rules', 'ngRoute']);
 
 app.config(['$routeProvider', function ($routeProvider) {
@@ -19,44 +19,44 @@ app.config(['$routeProvider', function ($routeProvider) {
 
        //}).
        when('/FormDesign', {
-           templateUrl: Settings.siteURL + 'View/FormDesign.html',
+           templateUrl: Settings.PublicScriptURL + 'View/FormDesign.html',
            controller: 'FormCtrl',
-           controllerAs:'vm'
+           controllerAs: 'vm'
 
        }).
        otherwise({
            redirectTo: '/FormDesign'
        });
 }]);
- 
- app.filter('to_trusted', ['$sce', function($sce){
-        return function(text) {
-            return $sce.trustAsHtml(text);
-        };
-    }]);
 
-	
-app.filter('getByKey', function() {
-  return function(input, key) {
-    var i=0, len=input.length;
-    for (; i<len; i++) {
-      if (input[i].key == key) {
-		  var returnObj=input[i];
-		  var j=i+1;
-        return {obj:returnObj,index:j};
-      }
+app.filter('to_trusted', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);
+
+
+app.filter('getByKey', function () {
+    return function (input, key) {
+        var i = 0, len = input.length;
+        for (; i < len; i++) {
+            if (input[i].key == key) {
+                var returnObj = input[i];
+                var j = i + 1;
+                return { obj: returnObj, index: j };
+            }
+        }
+        return null;
     }
-    return null;
-  }
 });
 
 app.filter('getByProperty', function () {
-    return function (input, propertyName,propertyValue) {
+    return function (input, propertyName, propertyValue) {
         var i = 0, len = input.length;
         for (; i < len; i++) {
             if (input[i].hasOwnProperty(propertyName) && input[i][propertyName] == propertyValue) {
                 var returnObj = input[i];
-               
+
                 return { obj: returnObj, index: i };
             }
         }
