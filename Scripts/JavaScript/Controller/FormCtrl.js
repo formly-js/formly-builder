@@ -11,7 +11,10 @@ app.controller('FormCtrl', ['formlyVersion', 'getOIMConfig', '$scope', '$builder
         $scope.isFormlyShowScope = true;
         $scope.rawFieldCode=getOIMConfig.getOIMConfig($scope.forms["default"], $builder.forms);
     }
-    
+    vm.StartScratch = function () {
+        clearForms($scope.forms);
+
+    }
     vm.CopyForm = function () {
        
         vm.fields = getOIMConfig.getOIMConfig($scope.forms["default"], $builder.forms);
@@ -77,6 +80,13 @@ app.controller('FormCtrl', ['formlyVersion', 'getOIMConfig', '$scope', '$builder
     {
       
        
+    }
+
+    function clearForms(forms) {
+        angular.forEach(forms, function (form, formName, obj) {
+            //clear out existing form components
+            clearForm(formName);          
+        });
     }
     loadFormData = function (itemData) {
         var forms;
