@@ -691,6 +691,9 @@
             droppables: {}
         };
         this.mouseMoved = false;
+        this.mx = 0;
+        this.my = 0;
+
         this.isMouseMoved = (function (_this) {
             return function () {
                 return _this.mouseMoved;
@@ -715,6 +718,11 @@
                     }
                 });
                 $(document).on('mousemove', function (e) {
+                    if (e.pageX == _this.mx && e.pageY == _this.my)
+                        return;
+                    _this.mx = e.pageX;
+                    _this.my = e.pageY;
+
                     var func, key, _ref;
                     _this.mouseMoved = true;
                     _ref = _this.hooks.move;
@@ -1309,7 +1317,7 @@
                {
             $originalHTML.find("form").children().first().prepend("<div class='form-group'><label class='control-label'>Key</label><input type='text' ng-model='key' class='form-control' /></div>");
            }
-           $originalHTML.find("form").children(".form-group").last().after("<div class='form-group'><label class='control-label'>Expression Properties</label><input type='text' ng-model='expressionProperties' class='form-control' /><p class='help-block'>Example:&quot;hide&quot;:&quot;model.myDate===''&quot;</p></div>" + "<div class='form-group'><label class='control-label'>SharePoint List Field Name</label><input type='text' ng-model='templateOptions.listFieldName' class='form-control' /><p class='help-block'>if you want to push this field value to the target SharePoint list, specify the field name here</p></div>");
+           $originalHTML.find("form").children(".form-group").last().after("<div class='form-group'><label class='control-label'>Validation Expression</label><input type='text' ng-model='expressionProperties' class='form-control' /><p class='help-block'>Example:&quot;hide&quot;:&quot;model.myDate===''&quot;</p></div>" + "<div class='form-group'><label class='control-label'>SharePoint List Field Name</label><input type='text' ng-model='templateOptions.listFieldName' class='form-control' /><p class='help-block'>if you want to push this field value to the target SharePoint list, specify the field name here</p></div>");
 
            $originalHTML.find("form").children().last().append("<hr /><div class='form-group'><input type='submit' ng-click='popover.save($event)' class='btn btn-primary' value='Save' /><input type='button' ng-click='popover.cancel($event)' class='btn btn-default' value='Cancel' /><input type='button' ng-click='popover.remove($event)' class='btn btn-danger' value='Delete' /></div>");
             
